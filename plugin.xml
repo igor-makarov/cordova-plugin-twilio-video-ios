@@ -1,0 +1,41 @@
+<?xml version='1.0' encoding='utf-8'?>
+<plugin id="cordova-plugin-twilio-video-ios" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+	<name>TwilioVideoIOS</name>
+	<author>Igor Makarov</author>
+	<license>MIT</license>
+	<js-module name="TwilioVideoIOS" src="www/TwilioVideoIOS.js">
+		<clobbers target="cordova.plugins.TwilioVideoIOS"/>
+	</js-module>
+
+	<dependency id="cordova-plugin-cocoapod-support"/>
+
+	<platform name="ios">
+		<config-file parent="/*" target="config.xml">
+			<feature name="TwilioVideoIOS">
+				<param name="ios-package" value="TwilioVideoIOS"/>
+			</feature>
+		</config-file>
+		<source-file src="src/ios/TwilioVideoIOS.m"/>
+		<source-file src="src/ios/TwilioVideoViewController.m"/>
+		<header-file src="src/ios/TwilioVideoViewController.h"/>
+		<resource-file src="src/ios/TwilioVideoIOS.storyboard" target="Resources/TwilioVideoIOS.storyboard"/>
+
+        <pods-config ios-min-version="8.1" use-frameworks="true">
+            <source url="https://github.com/twilio/cocoapod-specs"/>
+        </pods-config>
+
+        <pod name="TwilioVideo" version="1.0.0-beta10" />
+
+        <preference name="CAMERA_USAGE_DESCRIPTION"/>
+        <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
+            <string>$CAMERA_USAGE_DESCRIPTION</string>
+        </config-file>
+
+        <preference name="MICROPHONE_USAGE_DESCRIPTION"/>
+        <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
+            <string>$MICROPHONE_USAGE_DESCRIPTION</string>
+        </config-file>
+
+	</platform>
+
+</plugin>
