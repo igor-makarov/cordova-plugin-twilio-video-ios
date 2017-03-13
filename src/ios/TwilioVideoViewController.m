@@ -137,7 +137,8 @@
 
 - (void)logMessage:(NSString *)msg {
     NSLog(@"%@", msg);
-    self.messageLabel.text = msg;
+    // Uncomment to display logs on view
+    // self.messageLabel.text = msg;
 }
 
 #pragma mark - TVIRoomDelegate
