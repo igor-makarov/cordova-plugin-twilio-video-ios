@@ -7,6 +7,7 @@
         <clobbers target="cordova.plugins.TwilioVideo" />
     </js-module>
     <dependency id="cordova-plugin-cocoapod-support" />
+   
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
             <feature name="TwilioVideoIOS">
@@ -30,6 +31,7 @@
             <string>$MICROPHONE_USAGE_DESCRIPTION</string>
         </config-file>
     </platform>
+
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TwilioVideo">
@@ -45,7 +47,7 @@
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/manifest/application">
-            <activity android:name=".activity.VideoActivity" android:configChanges="orientation|screenSize">
+            <activity android:name="TwilioVideoActivity" android:configChanges="orientation|screenSize">
                 <intent-filter>
                     <action android:name="android.intent.action.MAIN" />
                     <category android:name="android.intent.category.LAUNCHER" />
@@ -53,6 +55,7 @@
             </activity>
         </config-file>
         <source-file src="src/android/TwilioVideo.java" target-dir="src/org/apache/cordova/twiliovideo" />
+        <source-file src="src/android/TwilioVideoActivity.java" target-dir="src/org/apache/cordova/twiliovideo" />
         <framework src="platforms/android/twiliovideo.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
