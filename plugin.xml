@@ -1,41 +1,61 @@
 <?xml version='1.0' encoding='utf-8'?>
-<plugin id="cordova-plugin-twilio-video-ios" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
-	<name>TwilioVideoIOS</name>
-	<author>Igor Makarov</author>
-	<license>MIT</license>
-	<js-module name="TwilioVideoIOS" src="www/TwilioVideoIOS.js">
-		<clobbers target="cordova.plugins.TwilioVideoIOS"/>
-	</js-module>
-
-	<dependency id="cordova-plugin-cocoapod-support"/>
-
-	<platform name="ios">
-		<config-file parent="/*" target="config.xml">
-			<feature name="TwilioVideoIOS">
-				<param name="ios-package" value="TwilioVideoIOS"/>
-			</feature>
-		</config-file>
-		<source-file src="src/ios/TwilioVideoIOS.m"/>
-		<source-file src="src/ios/TwilioVideoViewController.m"/>
-		<header-file src="src/ios/TwilioVideoViewController.h"/>
-		<resource-file src="src/ios/TwilioVideoIOS.storyboard" target="Resources/TwilioVideoIOS.storyboard"/>
-
+<plugin id="cordova-plugin-twilio-video" version="0.0.1" xmlns="http://apache.org/cordova/ns/plugins/1.0" xmlns:android="http://schemas.android.com/apk/res/android">
+    <name>TwilioVideoIOS</name>
+    <author>Igor Makarov</author>
+    <license>MIT</license>
+    <js-module name="TwilioVideo" src="www/TwilioVideo.js">
+        <clobbers target="cordova.plugins.TwilioVideo" />
+    </js-module>
+    <dependency id="cordova-plugin-cocoapod-support" />
+   
+    <platform name="ios">
+        <config-file parent="/*" target="config.xml">
+            <feature name="TwilioVideoIOS">
+                <param name="ios-package" value="TwilioVideo" />
+            </feature>
+        </config-file>
+        <source-file src="src/ios/TwilioVideo.m" />
+        <source-file src="src/ios/TwilioVideoViewController.m" />
+        <header-file src="src/ios/TwilioVideoViewController.h" />
+        <resource-file src="src/ios/TwilioVideoIOS.storyboard" target="Resources/TwilioVideo.storyboard" />
         <pods-config ios-min-version="8.1" use-frameworks="true">
-            <source url="https://github.com/twilio/cocoapod-specs"/>
+            <source url="https://github.com/twilio/cocoapod-specs" />
         </pods-config>
-
         <pod name="TwilioVideo" version="1.0.0-beta10" />
-
-        <preference name="CAMERA_USAGE_DESCRIPTION"/>
+        <preference name="CAMERA_USAGE_DESCRIPTION" />
         <config-file target="*-Info.plist" parent="NSCameraUsageDescription">
             <string>$CAMERA_USAGE_DESCRIPTION</string>
         </config-file>
-
-        <preference name="MICROPHONE_USAGE_DESCRIPTION"/>
+        <preference name="MICROPHONE_USAGE_DESCRIPTION" />
         <config-file target="*-Info.plist" parent="NSMicrophoneUsageDescription">
             <string>$MICROPHONE_USAGE_DESCRIPTION</string>
         </config-file>
+    </platform>
 
-	</platform>
-
+    <platform name="android">
+        <config-file target="res/xml/config.xml" parent="/*">
+            <feature name="TwilioVideo">
+                <param name="android-package" value="org.apache.cordova.plugin.TwilioVideo" />
+            </feature>
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/*">
+            <uses-permission android:name="android.permission.CAMERA" />
+            <uses-permission android:name="android.permission.INTERNET" />
+            <uses-permission android:name="android.permission.RECORD_AUDIO" />
+            <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+            <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+            <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+        </config-file>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name="TwilioVideoActivity" android:configChanges="orientation|screenSize">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
+        </config-file>
+        <source-file src="src/android/TwilioVideo.java" target-dir="src/org/apache/cordova/twiliovideo" />
+        <source-file src="src/android/TwilioVideoActivity.java" target-dir="src/org/apache/cordova/twiliovideo" />
+        <framework src="platforms/android/twiliovideo.gradle" custom="true" type="gradleReference" />
+    </platform>
 </plugin>

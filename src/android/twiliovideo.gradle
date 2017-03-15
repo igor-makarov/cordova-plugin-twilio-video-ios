@@ -1,0 +1,8 @@
+allprojects {
+    repositories {
+        jcenter()
+    }
+}
+
+// The Video library resides on jcenter
+compile 'com.twilio:video-android:1.0.0-beta12'
