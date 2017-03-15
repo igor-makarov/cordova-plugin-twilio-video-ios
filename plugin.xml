@@ -7,7 +7,6 @@
         <clobbers target="cordova.plugins.TwilioVideo" />
     </js-module>
     <dependency id="cordova-plugin-cocoapod-support" />
-
     <platform name="ios">
         <config-file parent="/*" target="config.xml">
             <feature name="TwilioVideoIOS">
@@ -31,11 +30,10 @@
             <string>$MICROPHONE_USAGE_DESCRIPTION</string>
         </config-file>
     </platform>
-
     <platform name="android">
         <config-file target="res/xml/config.xml" parent="/*">
             <feature name="TwilioVideo">
-                <param name="android-package" value="TwilioVideo" />
+                <param name="android-package" value="org.apache.cordova.plugin.TwilioVideo" />
             </feature>
         </config-file>
         <config-file target="AndroidManifest.xml" parent="/*">
@@ -46,19 +44,15 @@
             <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
             <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
         </config-file>
-        <config-file target="AndroidManifest.xml" parent="application">
-            <provider android:name="android.support.v4.content.FileProvider" android:authorities="${applicationId}.provider" android:exported="false" android:grantUriPermissions="true">
-                <meta-data android:name="android.support.FILE_PROVIDER_PATHS" android:resource="@xml/provider_paths" />
-            </provider>
+        <config-file target="AndroidManifest.xml" parent="/manifest/application">
+            <activity android:name=".activity.VideoActivity" android:configChanges="orientation|screenSize">
+                <intent-filter>
+                    <action android:name="android.intent.action.MAIN" />
+                    <category android:name="android.intent.category.LAUNCHER" />
+                </intent-filter>
+            </activity>
         </config-file>
-        <source-file src="src/android/CameraLauncher.java" target-dir="src/org/apache/cordova/camera" />
-        <source-file src="src/android/CordovaUri.java" target-dir="src/org/apache/cordova/camera" />
-        <source-file src="src/android/FileHelper.java" target-dir="src/org/apache/cordova/camera" />
-        <source-file src="src/android/ExifHelper.java" target-dir="src/org/apache/cordova/camera" />
-        <source-file src="src/android/xml/provider_paths.xml" target-dir="res/xml" />
-        <js-module src="www/CameraPopoverHandle.js" name="CameraPopoverHandle">
-            <clobbers target="CameraPopoverHandle" />
-        </js-module>
-        <framework src="com.android.support:support-v4:24.1.1+" />
+        <source-file src="src/android/TwilioVideo.java" target-dir="src/org/apache/cordova/twiliovideo" />
+        <framework src="platforms/android/twiliovideo.gradle" custom="true" type="gradleReference" />
     </platform>
 </plugin>
