@@ -1,20 +1,20 @@
-/********* TwilioVideoIOS.m Cordova Plugin Implementation *******/
+/********* TwilioVideo.m Cordova Plugin Implementation *******/
 
 #import <Cordova/CDV.h>
 #import "TwilioVideoViewController.h"
 
-@interface TwilioVideoIOS : CDVPlugin
+@interface TwilioVideo : CDVPlugin
 
 @end
 
-@implementation TwilioVideoIOS
+@implementation TwilioVideo
 
 - (void)openRoom:(CDVInvokedUrlCommand*)command {
     NSString* token = command.arguments[0];
     NSString* room = command.arguments[1];
     
     dispatch_async(dispatch_get_main_queue(), ^{
-        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"TwilioVideoIOS" bundle:nil];
+        UIStoryboard *sb = [UIStoryboard storyboardWithName:@"TwilioVideo" bundle:nil];
         TwilioVideoViewController *vc = [sb instantiateViewControllerWithIdentifier:@"TwilioVideoViewController"];
         
         vc.accessToken = token;
